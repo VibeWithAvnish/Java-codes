@@ -1,0 +1,154 @@
+//12 Interface
+packageDesignPattern;
+
+publicinterfacePaymentMethod
+{
+	publicabstractvoidpay(doubleamount);
+}
+
+//Class
+packageDesignPattern;
+
+importjava.util.Scanner;
+
+publicclassCreditCardimplementsPaymentMethod
+{
+	private String name;
+	privatedoublecardNumber;
+	privateintcvv;
+	private String dateOfExpiry;
+
+	Scanner sc = newScanner(System.in);
+	CreditCard()
+	{
+		System.out.println("Enter Name >>> ");
+		this.name=sc.next();
+		System.out.println("Enter Card Number >>> ");
+		this.cardNumber=sc.nextDouble();
+		System.out.println("Enter CVV >>> ");
+		this.cvv=sc.nextInt();
+		System.out.println("Enter Date of Expiry >>> ");
+		this.dateOfExpiry=sc.next();
+	}
+	@Override
+	publicvoidpay(doubleamount)
+	{
+		System.out.println(amount + " Paid With Credit Card.");
+	}
+}
+
+//Class
+packageDesignPattern;
+
+importjava.util.Scanner;
+
+publicclass PayPal implementsPaymentMethod
+{
+	private String loginId;
+	private String password;
+	Scanner sc = newScanner(System.in);
+	PayPal()
+	{
+		System.out.println("Enter Login ID >>> ");
+		this.loginId=sc.next();
+		System.out.println("Enter Password >>> ");
+		this.password=sc.next();
+	}
+	@Override
+	publicvoidpay(doubleamount) 
+	{
+		System.out.println(amount + " Paid using Paypal.");
+	}
+}
+
+//Class
+packageDesignPattern;
+
+importjava.util.Scanner;
+
+publicclassBitCoinimplementsPaymentMethod
+{
+	private String walletId;
+	privatedoublewalletNumber;
+	private String walletPassword;
+	Scanner sc = newScanner(System.in);
+	BitCoin()
+	{
+		System.out.println("Enter Wallet ID >>> ");
+		this.walletId=sc.next();
+		System.out.println("Enter Wallet Number >>> ");
+		this.walletNumber=sc.nextDouble();
+		System.out.println("Enter Password >>> ");
+		this.walletPassword=sc.next();
+	}
+	@Override
+	publicvoidpay(doubleamount) 
+	{
+		System.out.println(amount + " Paid using Bitcoin.");
+	}
+}
+
+//Class
+packageDesignPattern;
+
+publicclass Order 
+{
+	privatefinalPaymentMethodpaymentGateway;
+	privatefinaldoubleamount;
+	publicOrder(doubleamount , PaymentMethodpaymentGateway)
+	{
+		this.amount=amount;
+		this.paymentGateway=paymentGateway;
+	}
+	publicvoidprocess()
+	{
+		paymentGateway.pay(amount);
+	}
+}
+
+
+//Main Class
+packageDesignPattern;
+
+importjava.util.Scanner;
+
+publicclassDesignPattern
+{
+	publicstaticvoidmain(String[] args) 
+	{		
+		doubleamount=0;
+		intch;
+		Scanner sc = newScanner(System.in);
+		Order order;
+		do
+		{
+			System.out.println("\nPay Using >>> \n1.Credit Card \n2.PayPal \n3.BitCoin \n4.Exit \n>>> ");
+			ch=sc.nextInt();
+			if(ch==1 || ch==2 || ch==3)
+			{
+				System.out.println("Enter Amount to Transfer >>> ");
+				amount=sc.nextDouble();
+			}
+			switch(ch)
+			{
+				case 1:
+					order = newOrder(amount ,newCreditCard());
+					order.process();
+					System.out.println("Thank You For Shopping !");
+					break;
+					
+				case 2:
+					order = newOrder(amount ,new PayPal());
+					order.process();
+					System.out.println("Thank You For Shopping !");
+					break;
+					
+				case 3:
+					order = newOrder(amount ,newBitCoin());
+					order.process();
+					System.out.println("Thank You For Shopping !");
+					break;
+			}
+		}while(ch!=4);
+	}
+}

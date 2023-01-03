@@ -1,0 +1,116 @@
+
+//11Interface Car
+packageFactoryDesign;
+
+publicinterface Car 
+{
+	Public abstractvoidCarSpec();
+}
+
+//Class SUV
+packageFactoryDesign;
+
+publicclass SUV implements Car
+{
+	@Override
+	publicvoidCarSpec()
+	{
+		System.out.println("\nModel : XUV700"
+				+ "\nPrice : 14 Lakh"
+				+ "\nType : Turbo Petrol With Direct Injection (TGDi)"
+				+ "\nCapacity : 2.0 L"
+				+ "\nMax. Power : 147kW @5000 r/min"
+				+ "\nMax. Torque : 380 Nm @ 1750-3000 r/min"
+				+ "\nTransmissionType : 6 MT / 6 AT");
+	}
+}
+
+//Class Sedan
+packageFactoryDesign;
+
+publicclass Sedan implements Car
+{
+	@Override
+	publicvoidCarSpec()
+	{
+		System.out.println("Model : Honda City 4th Gen"
+				+ "\nEnginedisplacement : 1498 cc"
+				+ "\nMileage : 17.8kmpl and 18.4 kmpl"
+				+ "\nSeatingcapacity : 5"
+				+ "Price : Rs. 11.6 lakh to Rs. 15.3 lakh");
+	}
+}
+
+//Class HatchBack
+packageFactoryDesign;
+
+publicclassHatchBackimplements Car
+{
+	@Override
+	publicvoidCarSpec()
+	{
+		System.out.println("\nModel : Chevrolet Sail Hatchback"
+				+ "\nPrice : 5 Lakh"
+				+ "\nFuelType :PetrolEngine "
+				+ "\nDisplacement (cc)1199No. of cylinder 4 Max Power (bhp@rpm) 82.5bhp@6000 rpmMax "
+				+ "\nSeatingCapacity : 5 "
+				+ "\nFuel Tank Capacity : 42.0");
+	}
+}
+
+//Class CarFactory
+packageFactoryDesign;
+
+publicclassCarFactory
+{
+	publicCargetNewCar(intch) 
+	{
+
+if(ch==1)
+        {
+returnnewSUV();
+        }
+elseif(ch==2)
+        {
+returnnewHatchBack();
+        }
+elseif(ch==3)
+        {
+returnnewSedan();
+        }
+returnnull;
+	}
+}
+
+//Class FactoryMain
+packageFactoryDesign;
+
+importjava.util.Scanner;
+
+publicclassFactoryMain
+{
+	publicstaticvoidmain(String[] args)
+	{
+		intch;
+		CarFactoryobj = newCarFactory();
+		Scannersc = newScanner(System.in);
+		do
+		{
+			System.out.println("\n1.SUV \n2.HatchBack \n3.Sedan \n4.Exit \nEnter Your Choice >>> ");
+			ch=sc.nextInt();
+			Car carobj = obj.getNewCar(ch);
+			switch(ch)
+			{
+				case 1:
+					carobj.CarSpec();
+					break;
+				case 2:
+					carobj.CarSpec();
+					break;
+				case 3:
+					carobj.CarSpec();
+					break;
+			}
+		}while(ch!=4);
+	}
+}
